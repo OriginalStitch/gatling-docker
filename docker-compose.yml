@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  gatling:
+    build: .
+    container_name: "gatling"
+    volumes:
+      - ./conf:/var/gatling/conf
+      - ./results:/var/gatling/results
+      - ./user-files:/var/gatling/user-files
+    sysctls:
+      - net.core.somaxconn=65535
+#      - net.ipv4.tcp_max_syn_backlog=65535
+      - net.ipv4.tcp_fin_timeout=15
+      - net.ipv4.tcp_keepalive_intvl=30
+#      - net.ipv4.tcp_tw_reuse=1
+      - net.ipv4.ip_local_port_range=1025 65535
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+    tty: true
+#    networks:
+#      - sample_default
+#networks:
+#  sample_default:
+#    external: true

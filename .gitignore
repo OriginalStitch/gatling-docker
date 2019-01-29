@@ -1,0 +1,4 @@
+/conf/*
+/results/*
+/user-files/*
+!.keep
