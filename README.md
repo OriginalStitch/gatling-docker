@@ -22,14 +22,15 @@ CONTAINER ID        IMAGE                             COMMAND                  C
 
 3. Copy original Gatling files to local
 ```bash
-$ docker cp <CONTAINER ID>:/var/gatling/conf conf
-$ docker cp <CONTAINER ID>:/var/gatling/results results
-$ docker cp <CONTAINER ID>:/var/gatling/user\-files user\-files
+$ container=$(docker ps | grep gatling\-docker | awk '{print $1}')
+$ docker cp ${container}:/var/gatling/conf .
+$ docker cp ${container}:/var/gatling/results .
+$ docker cp ${container}:/var/gatling/user\-files .
 ```
 
 4. Stop container
 ```bash
-$ docker stop <CONTAINER ID>
+$ docker stop ${container}
 ```
 
 ## Modify user-files
@@ -40,7 +41,7 @@ You can remove / add your senarios under user-files/ directory.
 
 ```bash
 $ docker-compose up -d
-$ docker-compose exec gatling bash
+$ docker-compose exec gatling bash -l
 ```
 
 ## Run test
